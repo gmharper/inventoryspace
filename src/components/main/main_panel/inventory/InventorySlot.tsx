@@ -7,14 +7,16 @@ type InventorySpaceProps = {
 }
 
 const empty_slot = {
-    index:0, tag:'empty', item:''
+    index:0, row:0, column:0, tag:'empty', item:''
 }
 
 function InventorySlot ({ inventory_slot=empty_slot }:InventorySpaceProps):React.JSX.Element {
     return (
-        <div className='flex w-16 h-16 rounded-sm overflow-hidden bg-stone-200 outline-1 outline-zinc-600 p-1'>
-            <p className='text-black'>{ inventory_slot? inventory_slot.tag : empty_slot.tag }</p>
-        </div>
+        <button 
+            className='flex w-16 h-16 rounded-sm overflow-hidden bg-stone-200 outline-2 outline-zinc-600 p-1'
+            onClick={() => {}}>
+            <p className='text-black'>{ inventory_slot? inventory_slot.tag? inventory_slot.tag : empty_slot.tag : empty_slot.tag }</p>
+        </button>
     )
 }
 

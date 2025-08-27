@@ -1,7 +1,7 @@
 // COMPONENTS
 import { InventorySlot } from "./index"
 
-import { type inventory, type inventory_slot } from "../../../../types/types"
+import { type inventory_slot } from "../../../../types/types"
 
 // TYPE DECLARATIONS
 type InventoryProps = {
@@ -9,12 +9,12 @@ type InventoryProps = {
 }
 
 function Inventory ({ inventory }:InventoryProps):React.JSX.Element {
-    var number_of_rows = (inventory? 
+    const number_of_rows = (inventory? 
         inventory[inventory.length-1]? 
         inventory[inventory.length-1].row? 
         (inventory[inventory.length-1].row + 1) : 0 : 0 : 0)
 
-    var number_of_columns = (inventory? 
+    const number_of_columns = (inventory? 
         number_of_rows? 
         (inventory.length / number_of_rows) : 0 : 0)
 
@@ -24,10 +24,13 @@ function Inventory ({ inventory }:InventoryProps):React.JSX.Element {
             [...Array(number_of_rows).keys()].map((a, row) => {
                 return (
                     <div className='flex flex-row gap-1'>
-                    {    [...Array(number_of_columns).keys()].map((a, column) => {
+                    {   
+                        [...Array(number_of_columns).keys()].map((a, column) => {
+                            var index = row*(number_of_columns) + column
+
                             return <InventorySlot 
-                                key={inventory[row*(number_of_columns) + column].tag} 
-                                inventory_slot={inventory[row*(number_of_columns) + column]} />
+                                key={inventory[index].tag} 
+                                inventory_slot={inventory[index]} />
                         })
                     }
                     </div>
@@ -35,13 +38,6 @@ function Inventory ({ inventory }:InventoryProps):React.JSX.Element {
             })
             : <></> : <></>
         }
-        {/* // })
-        //     inventory[].map((inventory_slot:inventory_slot) => {
-        //         return (
-        //             
-        //         )
-        //     })
-        // } */}
         </div>
     )
 }
